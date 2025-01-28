@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import Swal from "sweetalert2";
+
 
 //#region AG grid config
 // Importing ag-grid
 import { AgGridReact } from "ag-grid-react";
 import { ModuleRegistry, AllCommunityModule } from "ag-grid-community";
-import { themeBalham } from "ag-grid-community";
+import { themeBalham, themeQuartz,themeAlpine} from "ag-grid-community";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
@@ -14,24 +16,54 @@ import data from "./data.json";
 import { snippet1, snippet2, snippet3, snippet4,snippet5 } from "./snippets";
 
 // to use customTheme in an application, pass it to the theme grid option
-const customTheme = themeBalham.withParams({
-  backgroundColor: "#1f2836",
-  browserColorScheme: "dark",
-  chromeBackgroundColor: {
-    ref: "foregroundColor",
-    mix: 0.07,
-    onto: "backgroundColor",
-  },
-  foregroundColor: "#FFF",
-  headerFontSize: 14,
-});
+
+//#region Theme Setup
+const createTheme = (theme) => {
+  return theme.withParams({
+    backgroundColor: "#1f2836",
+    browserColorScheme: "dark",
+    chromeBackgroundColor: {
+      ref: "foregroundColor",
+      mix: 0.07,
+      onto: "backgroundColor",
+    },
+    foregroundColor: "#FFF",
+    headerFontSize: 14,
+  });
+};
+//#endregion
+
+
 
 const App = () => {
   const [userData, setUserData] = useState(data);
+  const [customTheme, setCustomTheme] = useState(createTheme(themeQuartz));
 
   useEffect(() => {
-    setUserData(data);
+    if (data) {
+      setUserData(data);
+    } else {
+      console.error("Data not found");
+    }
   }, []);
+
+  const handleThemeChange = (e) => {
+    switch (e.target.value) {
+      case "themeQuartz":
+        setCustomTheme(createTheme(themeQuartz));
+        break;
+      case "themeBalham":
+        setCustomTheme(createTheme(themeBalham));
+        break;
+      case "themeAlpine":
+        setCustomTheme(createTheme(themeAlpine));
+        break;
+      default:
+        setCustomTheme(createTheme(themeBalham));
+        break;
+    }
+  };
+
 
   const columnDefs = [
     { headerName: "ID", field: "id", sortable: true, filter: true },
@@ -59,12 +91,22 @@ const App = () => {
     navigator.clipboard
       .writeText(text)
       .then(() => {
-        alert("Snippet copied to clipboard!");
+        Swal.fire({
+          title: "Copied to clipboard",
+          icon: "success",
+          timer: 1000,
+        });
       })
       .catch((err) => {
-        alert("Failed to copy text: " + err);
+        Swal.fire({
+          title: "Failed to copy",
+          icon: "error",
+          timer: 1000,
+        });
       });
   };
+
+
 
   //#endregion
 
@@ -87,11 +129,19 @@ const App = () => {
         style={{
           height: 600,
           width: 1200,
-          overflow: "auto",
+          overflow: "hidden",
           alignContent: "center",
           margin: "auto",
+          padding: "20px",
         }}
       >
+         <div className="select-theme">
+          <select name="" id="select-theme" onChange={handleThemeChange}>
+            <option value="themeQuartz">Theme Quartz</option>
+            <option value="themeBalham">Theme Balham</option>
+            <option value="themeAlpine">Theme Alpine</option>
+          </select>
+        </div>
         <AgGridReact
           rowData={userData}
           columnDefs={columnDefs}
@@ -171,7 +221,7 @@ const App = () => {
             className="copy-button"
             onClick={() => copyToClipboard(snippet5)}
           >
-            Copy
+            Copy 
           </button>
         </div>
       </div>
