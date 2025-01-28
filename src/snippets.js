@@ -1,8 +1,7 @@
 const snippet1 = `
 import { AgGridReact } from "ag-grid-react";
 import { ModuleRegistry, AllCommunityModules } from "ag-grid-community";
-ModuleRegistry.registerModules([AllCommunityModules]);
-import "ag-grid-community/styles/ag-theme-balham.css";`;
+ModuleRegistry.registerModules([AllCommunityModules]);`;
 
 const snippet2 = `ModuleRegistry.registerModules([AllCommunityModule]);`;
 
