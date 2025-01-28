@@ -1,3 +1,10 @@
+body{
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+}
+
 .snippet-container {
   display: flex;
   flex-wrap: wrap;
@@ -48,3 +55,42 @@
 .copy-button:hover {
   background-color: #0a8b7a;
 }
+
+#select-theme {
+  padding: 8px 12px;
+  font-size: 16px;
+  color: #333;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#select-theme:hover {
+  border-color: #007bff;
+  background: #f0f8ff;
+}
+
+#select-theme:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+#select-theme option {
+  font-size: 16px;
+  padding: 8px;
+  background: #fff;
+  color: #333;
+}
+
+.theme-label {
+  margin-right: 10px;
+  font-weight: bold;
+  color: #333;
+  font-size: 16px;
+}
+
+
