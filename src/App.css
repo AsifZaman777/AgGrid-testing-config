@@ -1,0 +1,49 @@
+.snippet-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+}
+
+.snippet-box {
+  width: 30%;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.snippet-box h4 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.snippet-textarea {
+  width: 95%;
+  height: 200px;
+  padding: 10px;
+  font-family: monospace;
+  font-size: 14px;
+  color: #ffffff;
+  background-color: #000000;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  resize: none;
+  overflow: auto;
+}
+.copy-button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.copy-button:hover {
+  background-color: #0056b3;
+}
